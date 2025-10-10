@@ -12,11 +12,7 @@ This is a personal system recovery/setup repository for a Fedora i3 environment.
 The goal is to go from a fresh install to a fully configured i3 desktop in minutes instead of days.
 
 ### Supported Operating Systems
-The bootstrap script supports the following operating systems:
-- **Fedora** (DNF package manager)
-- **Ubuntu/Debian/Pop!_OS** (APT package manager)
-- **Arch Linux/Manjaro** (Pacman package manager)
-- **openSUSE** (Zypper package manager)
+The bootstrap script is configured for Fedora (DNF) by default. Users can manually edit the script to change the package manager for other distributions.
 
 ## Setup Commands
 
