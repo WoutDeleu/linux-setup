@@ -17,7 +17,6 @@ The bootstrap script supports the following operating systems:
 - **Ubuntu/Debian/Pop!_OS** (APT package manager)
 - **Arch Linux/Manjaro** (Pacman package manager)
 - **openSUSE** (Zypper package manager)
-- **macOS** (Homebrew package manager)
 
 ## Setup Commands
 

@@ -30,10 +30,9 @@ detect_os() {
             print_error "Cannot detect Linux distribution"
             exit 1
         fi
-    elif [[ "$OSTYPE" == "darwin"* ]]; then
-        OS="macos"
     else
         print_error "Unsupported operating system: $OSTYPE"
+        print_error "This script only supports Linux distributions"
         exit 1
     fi
     print_info "Detected OS: $OS"
@@ -61,18 +60,9 @@ install_packages() {
             print_info "Using Zypper package manager"
             sudo zypper install -y ansible git stow
             ;;
-        macos)
-            print_info "Using Homebrew package manager"
-            # Check if Homebrew is installed
-            if ! command -v brew &> /dev/null; then
-                print_warning "Homebrew not found. Installing Homebrew..."
-                /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-            fi
-            brew install ansible git stow
-            ;;
         *)
             print_error "Unsupported OS: $OS"
-            print_error "Supported operating systems: Fedora, Ubuntu, Debian, Arch, Manjaro, openSUSE, macOS"
+            print_error "Supported operating systems: Fedora, Ubuntu, Debian, Arch, Manjaro, openSUSE"
             exit 1
             ;;
     esac

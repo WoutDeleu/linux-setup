@@ -61,7 +61,6 @@ The bootstrap script automatically detects your OS and uses the appropriate pack
 | Ubuntu/Debian/Pop!_OS | APT | ✅ Fully Supported |
 | Arch Linux/Manjaro | Pacman | ✅ Fully Supported |
 | openSUSE | Zypper | ✅ Fully Supported |
-| macOS | Homebrew | ✅ Fully Supported |
 
 ## Quick Start
 
