@@ -3,6 +3,7 @@
   hosts: local
   become: true
 
+
   tasks:
   
     - name: Enable and start Bluetooth service
@@ -24,6 +25,11 @@
           - blueman
         state: present
 
+    - name: Install Brave browser
+      shell: curl -fsS https://dl.brave.com/install.sh | sh
+      args:
+        creates: /usr/bin/brave-browser
+        
     - name: Swap Caps Lock and Escape keys
       command: localectl set-x11-keymap us "" "" caps:swapescape
       changed_when: false
