@@ -1,124 +1,99 @@
 # PC Setup Log
 
+This document is split into two parts:
+1. **Setup Log** - Record of manual steps performed during setup (for future automation)
+2. **Post-Installation Guide** - Steps to complete after running the Ansible playbook
+
 ---
 
-## Bluetooth Setup
+# Part 1: Setup Log
 
-### Connecting a Bluetooth Device using Blueman
+Record of manual configuration steps performed. These should be automated in future iterations.
 
-#### Prerequisites
-- Bluetooth adapter (built-in or USB dongle)
-- `bluez`, `bluez-tools`, and `blueman` packages installed (via Ansible playbook)
+## Installed Software
 
-#### Manual Steps
+| Software | Installation Method | Status |
+|----------|---------------------|--------|
+| Bluetooth (bluez, blueman) | Ansible | Automated |
+| arandr | Ansible | Automated |
+| Brave Browser | Ansible (curl script) | Automated |
+| gphotos-sync | Ansible (pipx) | Automated |
 
-1. **Start the Bluetooth service** (if not already running)
-   ```bash
-   sudo systemctl start bluetooth
-   sudo systemctl enable bluetooth
-   ```
+## Manual Steps Performed
 
-2. **Launch Blueman**
-   ```bash
-   blueman-manager
-   ```
-   Or find "Bluetooth Manager" in your application menu.
+- [ ] Connected Bluetooth keyboard via Blueman
+- [ ] Configured external monitors via arandr
+- [ ] Set up Brave sync chain
+- [ ] Configured gphotos-sync with Google API
 
-3. **Enable Bluetooth adapter**
-   - In Blueman, click the Bluetooth icon in the toolbar to enable the adapter (if disabled)
+---
 
-4. **Search for devices**
-   - Click the "Search" button in the toolbar
-   - Put your device in pairing mode (hold Bluetooth/pairing button until LED blinks)
-   - Wait for your device to appear in the list
+# Part 2: Post-Installation Guide
 
-5. **Pair the device**
-   - Right-click on the device in the list
-   - Select "Pair"
-   - If prompted for a PIN, enter it on the Bluetooth keyboard and press Enter
+Complete these steps after running `./bootstrap.sh` or the Ansible playbook.
 
-6. **Trust the device** (auto-reconnect on boot)
-   - Right-click on the device
-   - Select "Trust"
+## 1. Connect Bluetooth Devices
 
-7. **Connect**
-   - Right-click on the device
-   - Select "Connect"
+1. Launch Blueman: `blueman-manager`
+2. Click "Search" to scan for devices
+3. Put device in pairing mode
+4. Right-click device → "Pair" → "Trust" → "Connect"
 
-8. **Verify connection**
-   - The device should show a connected icon
-   - Test the device (type on keyboard, move mouse, etc.)
+### Enable FastConnectable (optional)
 
-#### Troubleshooting
-
-- **Device not appearing**: Ensure device is in pairing mode and adapter is enabled
-- **Pairing fails**: Remove device and try again
-- **Connection drops**: Ensure device is trusted; check `systemctl status bluetooth`
-- **Blueman not starting**: Check if `bluez` service is running
-
-### Enable FastConnectable for Bluetooth
-
-FastConnectable reduces the time it takes for devices to reconnect. Edit `/etc/bluetooth/main.conf`:
-
-```bash
-sudo nano /etc/bluetooth/main.conf
-```
-
-Find and uncomment/modify the `[General]` section:
-
+Edit `/etc/bluetooth/main.conf`:
 ```ini
 [General]
 FastConnectable = true
 ```
 
-Then restart the Bluetooth service:
-
-```bash
-sudo systemctl restart bluetooth
-```
-
-#### Automation Notes
-- Deploy `main.conf` via Ansible template
-- Use `lineinfile` or copy a pre-configured file to `/etc/bluetooth/main.conf`
+Restart: `sudo systemctl restart bluetooth`
 
 ---
 
-### Configure External Monitors
+## 2. Configure External Monitors
 
-Use `arandr` (installed via Ansible) to configure display layout:
-
-1. **Launch arandr**
-   ```bash
-   arandr
+1. Launch: `arandr`
+2. Drag monitors to set position
+3. Set resolution for each display
+4. Apply and save layout to `~/.screenlayout/`
+5. Add to i3 config for persistence:
+   ```
+   exec --no-startup-id ~/.screenlayout/monitor-layout.sh
    ```
 
-2. **Configure displays**
-   - Drag monitors to set their position (left/right/above/below)
-   - Click on a monitor to set resolution and orientation
-   - Uncheck "Same as" to disable mirroring
+---
 
-3. **Apply configuration**
-   - Click "Apply" to test the layout
-   - Click "Layout" → "Save As" to save the configuration as a script
+## 3. Setup Brave Browser Sync
 
-4. **Make configuration persistent**
-   - Save the layout script to `~/.screenlayout/`
-   - Add the script to your i3 config or `.xinitrc` to run on startup:
-     ```bash
-     ~/.screenlayout/monitor-layout.sh
-     ```
+1. Open Brave
+2. Go to Settings → Sync
+3. Enter sync chain code from existing device
 
-#### Automation Notes
-- Save `.screenlayout/*.sh` scripts to dotfiles
-- Add startup command to i3 config via stow
+---
 
-### Configure Fn Hotkeys
+## 4. Configure gphotos-sync
+
+1. Create Google API credentials at [Google Cloud Console](https://console.cloud.google.com/)
+2. Enable "Photos Library API"
+3. Create OAuth 2.0 credentials (Desktop application)
+4. Save credentials:
+   ```bash
+   mkdir -p ~/.config/gphotos-sync
+   mv ~/Downloads/client_secret_*.json ~/.config/gphotos-sync/client_secret.json
+   ```
+5. Run first sync: `gphotos-sync ~/Pictures/GooglePhotos`
+
+---
+
+## 5. Configure Fn Hotkeys
 
 <!-- TODO: Document Fn hotkey configuration -->
 
 ---
 
-## Next Steps
+## 6. Remap Caps Lock to Escape
 
-<!-- Add more setup steps below as you configure your system -->
-
+```bash
+sudo localectl set-x11-keymap us "" "" caps:escape
+```
