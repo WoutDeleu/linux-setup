@@ -3,8 +3,20 @@
   hosts: local
   become: true
 
+
   tasks:
   
+    - name: Enable and start Bluetooth service
+      systemd:
+        name: bluetooth
+        enabled: true
+        state: started
+        
+    - name: Install arandr display manager
+      dnf:
+        name: arandr
+        state: present
+        
     - name: Install Bluetooth packages
       dnf:
         name:
@@ -12,12 +24,6 @@
           - bluez-tools
           - blueman
         state: present
-
-    - name: Enable and start Bluetooth service
-      systemd:
-        name: bluetooth
-        enabled: true
-        state: started
 
     - name: Install Brave browser
       shell: curl -fsS https://dl.brave.com/install.sh | sh
