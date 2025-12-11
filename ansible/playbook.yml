@@ -24,3 +24,7 @@
           - blueman
         state: present
 
+    - name: Swap Caps Lock and Escape keys
+      command: localectl set-x11-keymap us "" "" caps:swapescape
+      changed_when: false
+

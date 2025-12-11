@@ -74,10 +74,3 @@ Restart: `sudo systemctl restart bluetooth`
 
 <!-- TODO: Document Fn hotkey configuration -->
 
----
-
-## 5. Swap Caps Lock and Escape
-
-```bash
-sudo localectl set-x11-keymap us "" "" caps:swapescape
-```
