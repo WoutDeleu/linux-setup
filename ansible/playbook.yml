@@ -4,7 +4,24 @@
   become: true
 
   tasks:
+  
+    - name: Install Bluetooth packages
+      dnf:
+        name:
+          - bluez
+          - bluez-tools
+          - blueman
+        state: present
+
+    - name: Enable and start Bluetooth service
+      systemd:
+        name: bluetooth
+        enabled: true
+        state: started
+
     - name: Install Brave browser
       shell: curl -fsS https://dl.brave.com/install.sh | sh
       args:
         creates: /usr/bin/brave-browser
+        
+
