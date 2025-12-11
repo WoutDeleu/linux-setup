@@ -56,8 +56,6 @@
 - **Connection drops**: Ensure device is trusted; check `systemctl status bluetooth`
 - **Blueman not starting**: Check if `bluez` service is running
 
----
-
 ### Enable FastConnectable for Bluetooth
 
 FastConnectable reduces the time it takes for devices to reconnect. Edit `/etc/bluetooth/main.conf`:
