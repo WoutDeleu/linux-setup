@@ -15,6 +15,7 @@
       dnf:
         name: arandr
         state: present
+        
     - name: Install Bluetooth packages
       dnf:
         name:
