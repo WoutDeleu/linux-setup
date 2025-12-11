@@ -5,18 +5,18 @@
 
 
   tasks:
-  
+
     - name: Enable and start Bluetooth service
       systemd:
         name: bluetooth
         enabled: true
         state: started
-        
+
     - name: Install arandr display manager
       dnf:
         name: arandr
         state: present
-        
+
     - name: Install Bluetooth packages
       dnf:
         name:
@@ -29,8 +29,12 @@
       shell: curl -fsS https://dl.brave.com/install.sh | sh
       args:
         creates: /usr/bin/brave-browser
-        
+
+    - name: Install Neovim
+      dnf:
+        name: neovim
+        state: present
+
     - name: Swap Caps Lock and Escape keys
       command: localectl set-x11-keymap us "" "" caps:swapescape
       changed_when: false
-
