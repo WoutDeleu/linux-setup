@@ -1,12 +1,6 @@
 # PC Setup Log
 
-This document logs manual setup steps performed on the system. The goal is to document each step in detail so it can later be automated via Ansible.
-
 ---
-
-## Post-Installation Configuration
-
-After running the Ansible playbook, the following manual configurations are required.
 
 ## Bluetooth Setup
 
@@ -64,10 +58,6 @@ After running the Ansible playbook, the following manual configurations are requ
 
 ---
 
-## Post-Installation Configuration
-
-After running the Ansible playbook, the following manual configurations are required.
-
 ### Enable FastConnectable for Bluetooth
 
 FastConnectable reduces the time it takes for devices to reconnect. Edit `/etc/bluetooth/main.conf`:
@@ -92,12 +82,6 @@ sudo systemctl restart bluetooth
 #### Automation Notes
 - Deploy `main.conf` via Ansible template
 - Use `lineinfile` or copy a pre-configured file to `/etc/bluetooth/main.conf`
-
----
-
-### Configure Fn Hotkeys
-
-<!-- TODO: Document Fn hotkey configuration -->
 
 ---
 
@@ -130,6 +114,13 @@ Use `arandr` (installed via Ansible) to configure display layout:
 - Save `.screenlayout/*.sh` scripts to dotfiles
 - Add startup command to i3 config via stow
 
+### Configure Fn Hotkeys
+
+<!-- TODO: Document Fn hotkey configuration -->
+
+---
+
 ## Next Steps
 
 <!-- Add more setup steps below as you configure your system -->
+
