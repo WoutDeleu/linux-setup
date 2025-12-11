@@ -4,7 +4,22 @@
   become: true
 
   tasks:
+  
+    - name: Enable and start Bluetooth service
+      systemd:
+        name: bluetooth
+        enabled: true
+        state: started
+        
     - name: Install arandr display manager
       dnf:
         name: arandr
         state: present
+    - name: Install Bluetooth packages
+      dnf:
+        name:
+          - bluez
+          - bluez-tools
+          - blueman
+        state: present
+
