@@ -17,14 +17,12 @@ Record of manual configuration steps performed. These should be automated in fut
 | Bluetooth (bluez, blueman) | Ansible | Automated |
 | arandr | Ansible | Automated |
 | Brave Browser | Ansible (curl script) | Automated |
-| gphotos-sync | Ansible (pipx) | Automated |
 
 ## Manual Steps Performed
 
 - [ ] Connected Bluetooth keyboard via Blueman
 - [ ] Configured external monitors via arandr
 - [ ] Set up Brave sync chain
-- [ ] Configured gphotos-sync with Google API
 
 ---
 
@@ -72,27 +70,13 @@ Restart: `sudo systemctl restart bluetooth`
 
 ---
 
-## 4. Configure gphotos-sync
-
-1. Create Google API credentials at [Google Cloud Console](https://console.cloud.google.com/)
-2. Enable "Photos Library API"
-3. Create OAuth 2.0 credentials (Desktop application)
-4. Save credentials:
-   ```bash
-   mkdir -p ~/.config/gphotos-sync
-   mv ~/Downloads/client_secret_*.json ~/.config/gphotos-sync/client_secret.json
-   ```
-5. Run first sync: `gphotos-sync ~/Pictures/GooglePhotos`
-
----
-
-## 5. Configure Fn Hotkeys
+## 4. Configure Fn Hotkeys
 
 <!-- TODO: Document Fn hotkey configuration -->
 
 ---
 
-## 6. Remap Caps Lock to Escape
+## 5. Remap Caps Lock to Escape
 
 ```bash
 sudo localectl set-x11-keymap us "" "" caps:escape
