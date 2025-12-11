@@ -1,0 +1,10 @@
+---
+- name: Configure Fedora workstation
+  hosts: local
+  become: true
+
+  tasks:
+    - name: Install arandr display manager
+      dnf:
+        name: arandr
+        state: present
