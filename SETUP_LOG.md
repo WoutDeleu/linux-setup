@@ -76,8 +76,8 @@ Restart: `sudo systemctl restart bluetooth`
 
 ---
 
-## 5. Remap Caps Lock to Escape
+## 5. Swap Caps Lock and Escape
 
 ```bash
-sudo localectl set-x11-keymap us "" "" caps:escape
+sudo localectl set-x11-keymap us "" "" caps:swapescape
 ```
